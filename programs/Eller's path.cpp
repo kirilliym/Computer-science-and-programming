@@ -18,7 +18,7 @@ int main() {
 	cout << "m = ";
 	int m; cin >> m;
 	vector<set<int>>g(n);
-	for (int i = 0; i < m; i++)									//считывание графа
+	for (int i = 0; i < m; i++)											//считывание графа
 	{
 		cout << "m[" << i + 1 << "] (u v) = ";
 		int u, v; cin >> u >> v;
@@ -29,7 +29,7 @@ int main() {
 
 	int v1 = -1, v2 = -1;
 	int f = 0;
-	for (int i = 0; i < n; ++i)									//нахождение нечетных вершин 
+	for (int i = 0; i < n; ++i)											//нахождение нечетных вершин 
 	{
 		if (g[i].size() % 2 == 1)
 		{
@@ -49,18 +49,14 @@ int main() {
 		}
 	}
 
-	if (f || v1 != -1 && v2 == -1)								//если нечетных больше чем 2 или 1 то путь не сущ.
-	{
-		cout << f << ' ' << v1 << ' ' << v2 << endl;
-		cout << "no Eller's path" << endl;
-		return 1;
-	}
+	if (f || v1 != -1 && v2 == -1)											//если нечетных больше чем 2 или 1 то путь не сущ.
+		f = 1;
 
 	stack<int> st;
 	if (v1 != -1) st.push(v1);
 	else st.push(0);
 	vector<int> res;
-	while (!st.empty())											//построение ответа
+	while (!st.empty())												//построение ответа
 	{
 		int v = st.top();
 
@@ -78,7 +74,7 @@ int main() {
 		}
 	}
 
-	for (int i = 0; i < n; ++i) if (g[i].size()) f = 1;			//проверка на связность
+	for (int i = 0; i < n; ++i) if (g[i].size()) f = 1;								//проверка на связность
 
 	if (f)														//ответ
 	{
