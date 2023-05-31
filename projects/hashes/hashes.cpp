@@ -125,6 +125,138 @@ node* ffind(node* a, string s)
 
 
 
+
+
+void openhash()
+{
+	ifstream in;
+	in.open("data base.txt");
+	ofstream out;
+	out.open("result.txt");
+	string s;
+	getline(cin, s);
+	vector<info> a;
+	while (getline(in, s)) a.push_back(getinfo(s));
+
+
+	/////////////////Making table////////////////////
+	cout << "table size = ";
+	cin >> mod;
+	vector<node *> table(mod, nullptr);
+	for (int i = 0; i < a.size(); i++)
+		ppush(table[hash1(a[i].money)], a[i]);
+
+
+	////////////////Printing table//////////////////
+	PrintTable(table);
+
+
+	///////////////Finding & deleting el////////////
+	string sur; int mon;
+	cout << "surname = "; cin >> sur;
+	cout << "money = "; cin >> mon;
+	node* cell = table[hash1(mon)];
+	node* foundation = ffind(cell, sur);
+	cout << "iterator = " << foundation << endl;
+	
+
+	if (!foundation) cout << "no such element" << endl;
+	else if (cell == foundation)			//begin
+	{
+		if (cell->next)
+		{
+			table[hash1(mon)] = cell->next;
+		}
+		else
+		{
+			table[hash1(mon)] = nullptr;
+		}
+	}
+	else
+	{
+		if (foundation->next && foundation->prev)		//center
+		{
+			foundation->next->prev = foundation->prev;
+			foundation->prev->next = foundation->next;
+		}
+		else
+		{
+			if (foundation->next)						//end
+			{
+				foundation->prev = nullptr;
+			}
+		}
+	}
+
+	PrintTable(table);
+}
+
+
+
+void closehash()
+{
+	ifstream in;
+	in.open("data base.txt");
+	ofstream out;
+	out.open("result.txt");
+	string s;
+	getline(cin, s);
+	vector<info> a;
+	while (getline(in, s)) a.push_back(getinfo(s));
+
+	/////////////////Making table////////////////////
+	cout << "table size (>= n) = ";
+	cin >> mod;
+	vector<int> table(mod, -1);
+	for (int i = 0; i < a.size(); i++)
+	{
+		int j = 0;
+		while (true)
+		{
+			if (table[hash2(a[i].money, j)] == -1)
+			{
+				table[hash2(a[i].money, j)] = i;
+				break;
+			}
+			else
+			{
+				j++;
+			}
+		}
+	}
+
+
+	for (int i = 0; i < table.size(); i++)
+	{
+		cout << i << ':';
+		if (table[i] != -1) PrintInfo(a[table[i]]);
+		cout << endl;
+	}
+
+
+	///////////////Finding el////////////////////
+	string sur; int mon;
+	cout << "surname = "; cin >> sur;
+	cout << "money = "; cin >> mon;
+	int j = 0;
+	vector<int> used(mod, 0);
+	while (true)
+	{
+		if (used[hash2(mon, j)]) break;
+		used[hash2(mon, j)] = 1;
+		if (a[table[hash2(mon, j)]].surname == sur)
+		{
+			cout << "element's index = " << hash2(mon, j) << endl;
+			return;
+		}
+		else j++;
+	}
+	cout << "no such element" << endl;
+}
+
+
+
+
 int main()
 {
 	cout << "task = ";
