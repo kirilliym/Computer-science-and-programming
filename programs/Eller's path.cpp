@@ -56,5 +56,41 @@ int main() {
 		return 1;
 	}
 
+	stack<int> st;
+	if (v1 != -1) st.push(v1);
+	else st.push(0);
+	vector<int> res;
+	while (!st.empty())											//построение ответа
+	{
+		int v = st.top();
+
+		if (!g[v].size())
+		{
+			res.push_back(v);
+			st.pop();
+		}
+		else
+		{
+			int u = *g[v].begin();
+			g[v].erase(u);
+			g[u].erase(v);
+			st.push(u);
+		}
+	}
+
+	for (int i = 0; i < n; ++i) if (g[i].size()) f = 1;			//проверка на связность
+
+	if (f)														//ответ
+	{
+		cout << "no Eller's path" << endl;
+		return 1;
+	}
+	else
+	{
+		if (v1 != -1) cout << "Eller's path: ";
+		else cout << "Eller's cycle: ";
+		for (int i = 0; i < res.size(); i++) cout << res[i] + 1 << ' ';
+		cout << endl;
+	}
 
 }
