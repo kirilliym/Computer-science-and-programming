@@ -13,6 +13,15 @@ using namespace std;
 vector<vector<int>>g;
 vector<int> used, ans;
 
+void dfs(int v)
+{
+	used[v] = 1;
+	for (auto u : g[v])
+	{
+		if (!used[u]) dfs(u);
+	}
+	ans.push_back(v);
+}
 
 int main() {
 
