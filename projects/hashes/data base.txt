@@ -1,2 +1,21 @@
 Ivanov director 10.04.1980 20 250020
+Ivanov director 13.06.2000 17 382483
+Ivanov director 18.01.2018 17 29032
+Fedorov director 18.01.2018 17 37429
+Krutkov director 22.02.2000 17 9999
+Ivanov host 01.01.2000 2 10000
+Koshkin manager 17.09.1998 3 16000
+Sidorov host 20.01.1977 30 16000
+Osipov host 20.01.1977 30 123
+Sidorov host 20.01.1977 30 39292
+Koshkin host 20.01.1977 30 29000
+Osipov header 09.12.1986 27 560094
+Osipov manager 18.02.1999 10 32587
+Osipov host 11.07.2000 2 16000
+Loginov dealer 09.11.1970 40 16000
+Huno buyer 30.09.1988 35 16022
+Huno buyer 30.09.1915 2 16000
+Huno buyer 30.09.1977 58 16000
+Huno buyer 30.09.1954 35 16000
+MEGA owner 01.01.0001 1000 999999
 
