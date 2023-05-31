@@ -34,7 +34,38 @@ int main() {
 
 	cout << "x = ";												//искомая вершина
 	int x; cin >> x; x--;
-	
+	d[x] = 0;
+	queue <int> q;
+	q.push(x);
+	while (q.size())											//Дейкстра
+	{
+		int v = q.front();
+		q.pop();
+		for (auto p : g[v])
+		{
+			int u = p.first, w = p.second;
+			if (d[u] > d[v] + w)
+			{
+				ans[u] = ans[v];
+				ans[u].push_back(v);
+				d[u] = d[v] + w;
+				q.push(u);
+			}
+			else continue;
+		}
+	}
+
+	cout << endl;
+	cout << "distances: ";											//ответ
+	for (int i = 0; i < n; i++) cout << d[i] << ' ';
+	cout << endl;
+	cout << "paths" << endl;
+	for (int i = 0; i < n; i++)
+	{
+		cout << i + 1 << ": ";
+		for (int j = 0; j < ans[i].size(); j++) cout << ans[i][j] + 1 << ' ';
+		cout << i + 1 << endl;
+	}
 }
 
 
