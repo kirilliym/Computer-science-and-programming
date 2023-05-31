@@ -27,5 +27,34 @@ int main() {
 		g[v].insert(u);
 	}
 
+	int v1 = -1, v2 = -1;
+	int f = 0;
+	for (int i = 0; i < n; ++i)									//нахождение нечетных вершин 
+	{
+		if (g[i].size() % 2 == 1)
+		{
+			if (v1 == -1)
+			{
+				v1 = i;
+			}
+			else if (v2 == -1)
+			{
+				v2 = i;
+			}
+			else
+			{
+				f = 1;
+				break;
+			}
+		}
+	}
+
+	if (f || v1 != -1 && v2 == -1)								//если нечетных больше чем 2 или 1 то путь не сущ.
+	{
+		cout << f << ' ' << v1 << ' ' << v2 << endl;
+		cout << "no Eller's path" << endl;
+		return 1;
+	}
+
 
 }
